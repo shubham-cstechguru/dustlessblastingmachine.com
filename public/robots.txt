@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin-control
+
+Sitemap: https://www.dustlessblastingmachine.com/sitemap.xml
+
