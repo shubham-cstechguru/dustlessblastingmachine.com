@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Technology extends Model
 {
+	protected $guarded = [];
     
     protected $table 		= "technology";
 
@@ -13,5 +14,13 @@ class Technology extends Model
 		return $this->hasOne('App\Model\Category', 'id', 'parent');
 	}
 
-    
+	public function city()
+	{
+		return $this->hasOne('App\model\City', 'id', 'prod_city');
+	}
+
+	public function country()
+	{
+		return $this->hasOne('App\model\Country', 'id', 'prod_country');
+	}
 }
