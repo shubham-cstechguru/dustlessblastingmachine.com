@@ -140,19 +140,27 @@ $whatsapp = preg_replace('/[+\(\)\-\" "]+/', '', $setting->whatsapp);
         <span class="header-mobile f-13" onclick="open_pop()" style="color:#fff;margin-right:12px;">Send Email <i class="icon-envelop insta-bg" style="color:#fff;"></i></span>
       </div>
     </div>
-    <div class="row py-3" style="background-color: #fff;-webkit-box-shadow: 0px 6px 10px -5px rgba(0,0,0,0.75);position: sticky;top: 0;z-index: 2;">
-      <div class="col-sm-4 col-8 align-self-center">
+    <div class="row py-3" style="background-color: #fff;-webkit-box-shadow: 0px 6px 10px -5px rgba(0,0,0,0.75);position: sticky;top: 0;z-index: 1;">
+      <!-- <div class="col-sm-4 col-8 align-self-center">
         <a href="{{url('/')}}" class="navbar-brand my_logo" style="padding:0px;margin-left:15px;">
-          @if($setting->logo !='')
+        {{--  @if($setting->logo !='')
           <img src="{{ url('imgs/'.$setting->logo) }}" alt="logo">
           @else
           {{ $setting->sitename }}
-          @endif
+          @endif --}}
         </a>
         <a href="tel:{{ $setting->mobile_no }}" class="mobile_no"><i class="icon-phone insta-bg" style="margin-left: 12px;"></i> {{ $setting->mobile_no }}</a>
-      </div>
-      <div class="col-sm-8 col-4">
+      </div> -->
+      <div class="col-10 col-lg-10">
         <nav class="navbar navbar-expand-lg navbar-light float-right">
+
+          <a href="{{url('/')}}" class="navbar-brand my_logo" style="padding:0px;margin-left:0px;">
+            @if($setting->logo !='')
+            <img src="{{ url('imgs/'.$setting->logo) }}" alt="logo">
+            @else
+            {{ $setting->sitename }}
+            @endif
+          </a>
 
           <button class="navbar-toggler" style="margin-left:auto;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -179,6 +187,11 @@ $whatsapp = preg_replace('/[+\(\)\-\" "]+/', '', $setting->whatsapp);
 
           </div>
         </nav>
+      </div>
+      <div class="col-2 col-md-2 my-lg-1 mb-2">
+        <div class="my-3 py-md-3 d-flex" style="color: #50adb1; cursor: pointer;" onclick="open_search()">
+          <i class="fa fa-search mt-1"></i> &nbsp; &nbsp; <p class="d-none d-sm-none d-md-none d-lg-block d-xl-block p-0 m-0">Search</p>
+        </div>
       </div>
     </div>
 
@@ -360,6 +373,28 @@ $whatsapp = preg_replace('/[+\(\)\-\" "]+/', '', $setting->whatsapp);
       </li>
     </ul>
   </div>
+  <div class="modal search-modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" style="background: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="modal-body">
+
+          {{ Form::open(['id'=>'search_form', 'data-url'=>route('ajax-search')]) }}
+          <div class="md-form">
+            {{ Form::text('search', '', ['class' => 'form-control validate name py-3 search', 'id'=>'search', 'placeholder'=>'Search Product','required'=>'required'])}}
+          </div>
+          {{ Form::close() }}
+
+          <ul class="list-group search-list">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- ALL JS FILES -->
   {{ Html::script('js/jquery.min.js') }}
   {{ Html::script('js/popper.min.js') }}
@@ -430,6 +465,14 @@ $whatsapp = preg_replace('/[+\(\)\-\" "]+/', '', $setting->whatsapp);
     function open_pop() {
       $('.modal').modal('show');
     }
+
+    function open_search() {
+      $('.search-modal').modal('show');
+    }
+
+    $('.search-modal').on('shown.bs.modal', function() {
+      $('input:text:visible:last').focus();
+    })
     $('.responsive').slick({
 
       infinite: true,
@@ -483,6 +526,48 @@ $whatsapp = preg_replace('/[+\(\)\-\" "]+/', '', $setting->whatsapp);
       });
 
     });
+  </script>
+
+<script>
+    // Open the Modal
+    function openModal() {
+      document.getElementById("myModal").style.display = "block";
+    }
+
+    // Close the Modal
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      var captionText = document.getElementById("caption");
+      if (n > slides.length) {
+        slideIndex = 1
+      }
+      if (n < 1) {
+        slideIndex = slides.length
+      }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
   </script>
 </body>
 

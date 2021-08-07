@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 
 
-use App\Model\Technology;
-use App\Model\Inquiry;
-use App\Model\Faq;
+use App\model\Technology;
+use App\model\Inquiry;
+use App\model\Faq;
 
 class TechnologyController extends BaseController {
     public function index() {

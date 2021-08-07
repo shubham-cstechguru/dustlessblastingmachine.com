@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Model\Category;
+use App\model\Category;
 use App\model\Technology;
 
 use Illuminate\Routing\Controller as BaseController;

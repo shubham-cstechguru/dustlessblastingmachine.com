@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Model\Service;
+use App\model\Service;
 
 
 use Illuminate\Routing\Controller as BaseController;
